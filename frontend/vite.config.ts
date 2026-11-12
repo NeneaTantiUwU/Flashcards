@@ -5,9 +5,12 @@ import { defineConfig } from 'vite'
 export default defineConfig({
   plugins: [react()],
   server: {
-    // Forward API calls to the Flask backend during development.
+    // Forward /api calls to the Python backend during development.
     proxy: {
-      '/api': 'http://127.0.0.1:5000',
+      '/api': {
+        target: 'http://localhost:5000',
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
     },
   },
 })
