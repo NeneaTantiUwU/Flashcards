@@ -1,4 +1,4 @@
-type Card = {
+export type Card = {
   id: string;
   front: string;
   back: string;
@@ -6,10 +6,10 @@ type Card = {
   dueDate: string;      
 };
 
-type Deck = {
+export type Deck = {
   id: string;
   name: string;
   cards: Card[];
 };
 
-type Rating = "hard" | "ok" | "easy";
+export type Rating = "hard" | "ok" | "easy";

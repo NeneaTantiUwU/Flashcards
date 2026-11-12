@@ -1,3 +1,5 @@
+import type { Rating } from "./data";
+
 export type NewDeck = {
   name: string;
 };

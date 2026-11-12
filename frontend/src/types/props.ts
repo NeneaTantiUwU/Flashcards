@@ -1,3 +1,5 @@
+import type { Card, Deck } from "./data";
+
 export type DeckListProps = {
   decks: Deck[];
   onOpen: (deckId: string) => void;
