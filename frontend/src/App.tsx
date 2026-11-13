@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import type { Deck, View } from "./types";
+import type { Card, Deck, View } from "./types";
 import DeckList from "./components/DeckList";
 import { API_URL } from "./config";
 import DeckDetail from "./components/DeckDetail";
+import StudyMode from "./components/StudyMode";
 
 export default function App() {
   const [decks, setDecks] = useState<Deck[]>([]);
@@ -30,10 +31,40 @@ const handleDeckDeleted = (deckId: string) => {
     setDecks((prev) => prev.map((d) => (d.id === updated.id ? updated : d)));
   };
 
+  const handleCardReviewed = (updated: Card) => {
+  setDecks((prev) =>
+    prev.map((d) => ({
+      ...d,
+      cards: d.cards.map((c) => (c.id === updated.id ? updated : c)),
+    }))
+  );
+};
+
   const goToDecks = () => setView({ screen: "decks" });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
+
+if (view.screen === "study") {
+  const studyDeck = decks.find((d) => d.id === view.deckId);
+
+  if (!studyDeck) {
+    return (
+      <div>
+        <p>Deck not found.</p>
+        <button onClick={goToDecks}>← Back</button>
+      </div>
+    );
+  }
+
+  return (
+    <StudyMode
+      deck={studyDeck}
+      onBack={() => setView({ screen: "deckDetail", deckId: studyDeck.id })}
+      onCardReviewed={handleCardReviewed}
+    />
+  );
+}
 
 if (view.screen === "deckDetail") {
     const selectedDeck = decks.find((d) => d.id === view.deckId);
@@ -51,7 +82,7 @@ if (view.screen === "deckDetail") {
       <DeckDetail
         deck={selectedDeck}
         onBack={goToDecks}
-        onStudy={() => {}}  
+        onStudy={() => setView({ screen: "study", deckId: selectedDeck.id })}  
         onDeckChange={handleDeckChange}
       />
     );
@@ -62,7 +93,7 @@ if (view.screen === "deckDetail") {
       <h1>Flashcards</h1>
       <DeckList
         decks={decks}
-        onOpen={() => {}}          
+        onOpen={(deckId) => setView({ screen: "deckDetail", deckId })}          
         onDeckAdded= {handleDeckAdded}     
         onDeckDeleted={handleDeckDeleted}   
       />
