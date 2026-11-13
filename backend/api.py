@@ -102,6 +102,41 @@ class Handler(BaseHTTPRequestHandler):
 
             self.send_json(card, 201)
 
+        elif len(parts) == 4 and parts[1] == "cards" and parts[3] == "review":
+            card_id = parts[2]
+            body = self.read_body()
+
+            rating = body.get("rating")
+            if rating not in ("hard", "ok", "easy"):
+                self.send_json({"error": "rating must be hard, ok or easy"}, 400)   
+                return 
+
+            decks = load()
+            card = None
+            for deck in decks:
+                for c in deck["cards"]:
+                    if c["id"] == card_id:
+                        card = c
+                        break
+                    if card:
+                        break
+
+                if card is None:
+                    self.send_json({"error": "card not found"}, 404)
+                    return
+
+                if rating == "hard":
+                    card["interval"] = 1
+                elif rating == "ok":
+                    card["interval"] = max(1, card["interval"] * 2)
+                else:
+                    card["interval"] = max(3, card["interval"] * 3)
+
+                card["dueDate"] = (date.today() + timedelta(days=card["interval"])).isoformat()
+
+                save(decks)
+                self.send_json(card)
+
         else:
             self.send_json({"error": "not found"}, 404)
 
