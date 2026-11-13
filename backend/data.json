@@ -1,1 +1,49 @@
-[]
+[
+  {
+    "id": "1a4d1776-70f9-47e5-a095-9e0cac27d6dc",
+    "name": "Web",
+    "cards": [
+      {
+        "id": "b29b3035-5af2-456a-a5df-6dd6462a474b",
+        "front": "What is http protocol responsable for?",
+        "back": "Is responsible for facilitating the exchange of information and the transfer of resources between a client (usually a web browser) and a server on the internet",
+        "interval": 3,
+        "dueDate": "2026-11-16"
+      },
+      {
+        "id": "c6f8aa71-1aae-4938-b2cd-8557f2ed2607",
+        "front": "What is HTML (Hyper Text Markup Language) ?",
+        "back": "The standard building block and structural blueprint for web pages",
+        "interval": 3,
+        "dueDate": "2026-11-16"
+      }
+    ]
+  },
+  {
+    "id": "83cc04af-ee59-48fd-97ad-929e46043881",
+    "name": "Animals",
+    "cards": [
+      {
+        "id": "97b7be6e-92c1-477f-bb1a-718a813a166c",
+        "front": "Is the duck a mammalian?",
+        "back": "Yes",
+        "interval": 3,
+        "dueDate": "2026-11-16"
+      },
+      {
+        "id": "01e897e4-b812-4217-84c7-2426181970f0",
+        "front": "What is the average height of a giraffe?",
+        "back": "5 meters",
+        "interval": 3,
+        "dueDate": "2026-11-16"
+      },
+      {
+        "id": "53dfcef8-98e7-4094-9256-45d5fb4b083d",
+        "front": "What color was the dog i saw yesterday =))?",
+        "back": "Blue",
+        "interval": 1,
+        "dueDate": "2026-11-14"
+      }
+    ]
+  }
+]
