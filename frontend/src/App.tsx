@@ -16,6 +16,14 @@ export default function App() {
       .finally(() => setLoading(false));
   }, []);
 
+  const handleDeckAdded = (deck: Deck) => {
+  setDecks((prev) => [...prev, deck]);
+};
+
+const handleDeckDeleted = (deckId: string) => {
+  setDecks((prev) => prev.filter((d) => d.id !== deckId));
+};
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
@@ -25,8 +33,8 @@ export default function App() {
       <DeckList
         decks={decks}
         onOpen={() => {}}          
-        onDeckAdded={() => {}}     
-        onDeckDeleted={() => {}}   
+        onDeckAdded= {handleDeckAdded}     
+        onDeckDeleted={handleDeckDeleted}   
       />
     </div>
   );
