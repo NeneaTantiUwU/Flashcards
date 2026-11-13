@@ -109,8 +109,10 @@ class Handler(BaseHTTPRequestHandler):
 
 
     def do_DELETE(self):
-        if self.path.startswith("/decks/"):
-            deck_id = self.path.split("/")[2]
+        parts = self.path.split("/")
+
+        if len(parts) == 3 and parts[1] == "decks":
+            deck_id = parts[2]
 
             decks = load()
             new_decks = [d for d in decks if d["id"] != deck_id]
@@ -121,8 +123,29 @@ class Handler(BaseHTTPRequestHandler):
 
             save(new_decks)
             self.send_json({"ok": True})
+
+        elif len(parts) == 3 and parts[1] == "cards":
+            card_id = parts[2]
+
+            decks = load()
+            found = False
+            for deck in decks:
+                new_cards = [c for c in deck["cards"] if c["id"] != card_id]
+                if len(new_cards) != len(deck["cards"]):
+                   deck["cards"] = new_cards
+                   found = True
+                   break
+
+            if not found:
+                self.send_json({"error": "card not found"}, 404)
+                return
+
+            save(decks)
+            self.send_json({"ok": True})
+
         else:
             self.send_json({"error": "not found"}, 404)
+            
 
 
 if __name__ == "__main__":
