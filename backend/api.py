@@ -118,24 +118,24 @@ class Handler(BaseHTTPRequestHandler):
                     if c["id"] == card_id:
                         card = c
                         break
-                    if card:
-                        break
+                if card:
+                    break
 
-                if card is None:
-                    self.send_json({"error": "card not found"}, 404)
-                    return
+            if card is None:
+                self.send_json({"error": "card not found"}, 404)
+                return
 
-                if rating == "hard":
-                    card["interval"] = 1
-                elif rating == "ok":
-                    card["interval"] = max(1, card["interval"] * 2)
-                else:
-                    card["interval"] = max(3, card["interval"] * 3)
+            if rating == "hard":
+                card["interval"] = 1
+            elif rating == "ok":
+                card["interval"] = max(1, card["interval"] * 2)
+            else:
+                card["interval"] = max(3, card["interval"] * 3)
 
-                card["dueDate"] = (date.today() + timedelta(days=card["interval"])).isoformat()
+            card["dueDate"] = (date.today() + timedelta(days=card["interval"])).isoformat()
 
-                save(decks)
-                self.send_json(card)
+            save(decks)
+            self.send_json(card)
 
         else:
             self.send_json({"error": "not found"}, 404)
