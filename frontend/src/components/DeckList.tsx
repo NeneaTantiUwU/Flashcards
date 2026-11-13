@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { Deck, DeckListProps } from "../types";
 import { API_URL } from "../config";
 
-export default function DeckList({ decks, onDeckAdded, onDeckDeleted }: DeckListProps) {
+export default function DeckList({ decks, onOpen, onDeckAdded, onDeckDeleted }: DeckListProps) {
   const [name, setName] = useState("");
 
   const handleAdd = async (e: React.FormEvent) => {
@@ -56,7 +56,9 @@ export default function DeckList({ decks, onDeckAdded, onDeckDeleted }: DeckList
         <ul>
           {decks.map((deck) => (
             <li key={deck.id}>
-              {deck.name} ({deck.cards.length} cards)
+             <span onClick={() => onOpen(deck.id)} style={{ cursor: "pointer" }}>
+                {deck.name} ({deck.cards.length} cards)
+              </span>
               <button onClick={() => handleDelete(deck.id)}>Delete</button>
             </li>
           ))}
