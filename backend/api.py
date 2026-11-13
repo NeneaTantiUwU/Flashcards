@@ -1,7 +1,7 @@
 from pathlib import Path
 import json
 import uuid
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from datetime import date, timedelta
 
 DATA_FILE = Path("data.json")
@@ -185,4 +185,4 @@ class Handler(BaseHTTPRequestHandler):
 
 if __name__ == "__main__":
     print("Server running on http://localhost:5000")
-    HTTPServer(("localhost", 5000), Handler).serve_forever()
+    ThreadingHTTPServer(("localhost", 5000), Handler).serve_forever()

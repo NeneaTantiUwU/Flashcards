@@ -47,15 +47,19 @@ export default function DeckDetail({ deck, onBack, onStudy, onDeckChange }: Deck
 
   return (
     <div>
-      <button onClick={onBack}>← Back</button>
+      <button className="back-button" onClick={onBack}>← Back</button>
 
-      <h2>{deck.name}</h2>
-      <p>
-        {deck.cards.length} cards, {dueCount} due today
-      </p>
-      <button onClick={onStudy} disabled={dueCount === 0}>
-        Study
-      </button>
+      <div className="deck-header">
+        <div>
+          <h2>{deck.name}</h2>
+          <p>
+            {deck.cards.length} cards, {dueCount} due today
+          </p>
+        </div>
+        <button onClick={onStudy} disabled={dueCount === 0}>
+          Study
+        </button>
+      </div>
 
       <h3>Add a card</h3>
       <form onSubmit={handleAddCard}>

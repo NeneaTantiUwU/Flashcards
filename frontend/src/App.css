@@ -1,0 +1,130 @@
+
+.status {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.back-button {
+  margin-bottom: 16px;
+  padding: 6px 10px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.back-button:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.deck-name {
+  flex: 1;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.deck-name .muted {
+  margin-left: 6px;
+  font-weight: 400;
+}
+
+.deck-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.deck-header h2 {
+  margin: 0 0 4px;
+}
+
+.deck-header p {
+  margin: 0;
+}
+
+.card-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.study-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.study-top .back-button {
+  margin-bottom: 0;
+}
+
+.study-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 220px;
+  padding: 32px 24px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+  text-align: center;
+}
+
+.study-card h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.study-answer {
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px dashed var(--border);
+  width: 100%;
+  color: var(--text);
+  font-size: 1.15rem;
+}
+
+.rating-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.rating-buttons button {
+  min-width: 90px;
+}
+
+.rate-hard {
+  background: var(--danger);
+}
+
+.rate-hard:hover {
+  background: #c93b40;
+}
+
+.rate-easy {
+  background: #30a46c;
+}
+
+.rate-easy:hover {
+  background: #278a5b;
+}
+
+.done {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.done h2 {
+  margin-top: 0;
+}

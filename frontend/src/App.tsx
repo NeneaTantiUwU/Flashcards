@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { Card, Deck, View } from "./types";
 import DeckList from "./components/DeckList";
 import { API_URL } from "./config";
+import "./App.css";
 import DeckDetail from "./components/DeckDetail";
 import StudyMode from "./components/StudyMode";
 
@@ -42,8 +43,8 @@ const handleDeckDeleted = (deckId: string) => {
 
   const goToDecks = () => setView({ screen: "decks" });
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="status">Loading...</p>;
+  if (error) return <p className="status">{error}</p>;
 
 if (view.screen === "study") {
   const studyDeck = decks.find((d) => d.id === view.deckId);
@@ -51,8 +52,8 @@ if (view.screen === "study") {
   if (!studyDeck) {
     return (
       <div>
-        <p>Deck not found.</p>
-        <button onClick={goToDecks}>← Back</button>
+        <p className="status">Deck not found.</p>
+        <button className="back-button" onClick={goToDecks}>← Back</button>
       </div>
     );
   }
@@ -72,8 +73,8 @@ if (view.screen === "deckDetail") {
     if (!selectedDeck) {
       return (
         <div>
-          <p>Deck not found.</p>
-          <button onClick={goToDecks}>← Back</button>
+          <p className="status">Deck not found.</p>
+          <button className="back-button" onClick={goToDecks}>← Back</button>
         </div>
       );
     }

@@ -34,10 +34,10 @@ export default function StudyMode({ deck, onBack, onCardReviewed }: StudyModePro
 
   if (index >= queue.length) {
     return (
-      <div>
+      <div className="done">
         <h2>All done for today!</h2>
         <p>You reviewed {queue.length} cards.</p>
-        <button onClick={onBack}>← Back to deck</button>
+        <button className="back-button" onClick={onBack}>← Back to deck</button>
       </div>
     );
   }
@@ -46,23 +46,29 @@ export default function StudyMode({ deck, onBack, onCardReviewed }: StudyModePro
 
   return (
     <div>
-      <button onClick={onBack}>← Back</button>
-      <p>
-        {deck.name}: card {index + 1} of {queue.length}
-      </p>
+      <div className="study-top">
+        <button className="back-button" onClick={onBack}>← Back</button>
+        <span className="muted">
+          {deck.name}: card {index + 1} of {queue.length}
+        </span>
+      </div>
 
-      <h2>{card.front}</h2>
+      <div className="study-card">
+        <h2>{card.front}</h2>
+        {showAnswer && <p className="study-answer">{card.back}</p>}
+      </div>
 
-      {showAnswer ? (
-        <>
-          <p>{card.back}</p>
-          <button onClick={() => handleRate("hard")}>Hard</button>
-          <button onClick={() => handleRate("ok")}>Ok</button>
-          <button onClick={() => handleRate("easy")}>Easy</button>
-        </>
-      ) : (
-        <button onClick={() => setShowAnswer(true)}>Show answer</button>
-      )}
+      <div className="rating-buttons">
+        {showAnswer ? (
+          <>
+            <button className="rate-hard" onClick={() => handleRate("hard")}>Hard</button>
+            <button className="rate-ok" onClick={() => handleRate("ok")}>Ok</button>
+            <button className="rate-easy" onClick={() => handleRate("easy")}>Easy</button>
+          </>
+        ) : (
+          <button onClick={() => setShowAnswer(true)}>Show answer</button>
+        )}
+      </div>
     </div>
   );
 }

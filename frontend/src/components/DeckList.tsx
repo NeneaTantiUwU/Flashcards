@@ -56,8 +56,9 @@ export default function DeckList({ decks, onOpen, onDeckAdded, onDeckDeleted }: 
         <ul>
           {decks.map((deck) => (
             <li key={deck.id}>
-             <span onClick={() => onOpen(deck.id)} style={{ cursor: "pointer" }}>
-                {deck.name} ({deck.cards.length} cards)
+             <span className="deck-name" onClick={() => onOpen(deck.id)}>
+                {deck.name}
+                <span className="muted">{deck.cards.length} cards</span>
               </span>
               <button onClick={() => handleDelete(deck.id)}>Delete</button>
             </li>
